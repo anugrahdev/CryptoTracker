@@ -20,6 +20,9 @@
 		9C91526E26FA39DB00F5AC97 /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C91526D26FA39DB00F5AC97 /* UIViewController+Extensions.swift */; };
 		9C91527126FA3A0100F5AC97 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C91527026FA3A0100F5AC97 /* BaseViewController.swift */; };
 		9C91527326FA3A8500F5AC97 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C91527226FA3A8500F5AC97 /* UIView+Extensions.swift */; };
+		9C91527526FA3B6E00F5AC97 /* CryptoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C91527426FA3B6E00F5AC97 /* CryptoTableViewCell.swift */; };
+		9C91527726FA3BE000F5AC97 /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C91527626FA3BE000F5AC97 /* Reusable.swift */; };
+		9C91527926FA3BF600F5AC97 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C91527826FA3BF600F5AC97 /* BaseTableViewCell.swift */; };
 		AFEFDE621866476166AA8C43 /* Pods_CryptoTrackerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21B03341888E74055B512164 /* Pods_CryptoTrackerTests.framework */; };
 		E01FEC280142BAB4FB8CE7F6 /* Pods_CryptoTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EF4B6EEE02511D49126C897 /* Pods_CryptoTracker.framework */; };
 		FF757A4425046DFDDD48FFA2 /* Pods_CryptoTracker_CryptoTrackerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9935CB5BECEA3B79EAA69F25 /* Pods_CryptoTracker_CryptoTrackerUITests.framework */; };
@@ -68,6 +71,9 @@
 		9C91526D26FA39DB00F5AC97 /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		9C91527026FA3A0100F5AC97 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		9C91527226FA3A8500F5AC97 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
+		9C91527426FA3B6E00F5AC97 /* CryptoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoTableViewCell.swift; sourceTree = "<group>"; };
+		9C91527626FA3BE000F5AC97 /* Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
+		9C91527826FA3BF600F5AC97 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
 		C0A6DF51962C7901B175CEFE /* Pods-CryptoTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CryptoTracker.release.xcconfig"; path = "Target Support Files/Pods-CryptoTracker/Pods-CryptoTracker.release.xcconfig"; sourceTree = "<group>"; };
 		C35AAE36C9E360607C6907FE /* Pods-CryptoTrackerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CryptoTrackerTests.release.xcconfig"; path = "Target Support Files/Pods-CryptoTrackerTests/Pods-CryptoTrackerTests.release.xcconfig"; sourceTree = "<group>"; };
 		DDDF402AE0F909BD4058F485 /* Pods-CryptoTrackerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CryptoTrackerTests.debug.xcconfig"; path = "Target Support Files/Pods-CryptoTrackerTests/Pods-CryptoTrackerTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -130,9 +136,6 @@
 				9C91526626FA34A600F5AC97 /* Extensions */,
 				9C91526526FA349A00F5AC97 /* Services */,
 				9C91526426FA349400F5AC97 /* Menu */,
-				9C91523126FA342700F5AC97 /* AppDelegate.swift */,
-				9C91523326FA342700F5AC97 /* SceneDelegate.swift */,
-				9C91523526FA342700F5AC97 /* HomeViewController.swift */,
 				9C91523726FA342700F5AC97 /* Main.storyboard */,
 				9C91523D26FA342900F5AC97 /* Assets.xcassets */,
 				9C91523F26FA342900F5AC97 /* LaunchScreen.storyboard */,
@@ -205,6 +208,8 @@
 		9C91526926FA34EA00F5AC97 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				9C91523526FA342700F5AC97 /* HomeViewController.swift */,
+				9C91527426FA3B6E00F5AC97 /* CryptoTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -219,7 +224,11 @@
 		9C91526F26FA39F400F5AC97 /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				9C91523126FA342700F5AC97 /* AppDelegate.swift */,
+				9C91523326FA342700F5AC97 /* SceneDelegate.swift */,
 				9C91527026FA3A0100F5AC97 /* BaseViewController.swift */,
+				9C91527626FA3BE000F5AC97 /* Reusable.swift */,
+				9C91527826FA3BF600F5AC97 /* BaseTableViewCell.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -489,10 +498,13 @@
 				9C91523226FA342700F5AC97 /* AppDelegate.swift in Sources */,
 				9C91523426FA342700F5AC97 /* SceneDelegate.swift in Sources */,
 				9C91523C26FA342700F5AC97 /* CryptoTracker.xcdatamodeld in Sources */,
+				9C91527726FA3BE000F5AC97 /* Reusable.swift in Sources */,
+				9C91527926FA3BF600F5AC97 /* BaseTableViewCell.swift in Sources */,
 				9C91526E26FA39DB00F5AC97 /* UIViewController+Extensions.swift in Sources */,
 				9C91527126FA3A0100F5AC97 /* BaseViewController.swift in Sources */,
 				9C91527326FA3A8500F5AC97 /* UIView+Extensions.swift in Sources */,
 				9C91526C26FA358E00F5AC97 /* CryptoModel.swift in Sources */,
+				9C91527526FA3B6E00F5AC97 /* CryptoTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
