@@ -10,6 +10,7 @@ target 'CryptoTracker' do
   pod 'RxCocoa'
   pod 'SnapKit'
   pod 'Kingfisher'
+  pod 'Alamofire'
 
   target 'CryptoTrackerTests' do
     inherit! :search_paths

@@ -9,12 +9,19 @@ import UIKit
 
 class HomeViewController: BaseViewController {
     
+    let viewModel = HomeViewModel()
+    
     private var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.register(CryptoTableViewCell.self, forCellReuseIdentifier: CryptoTableViewCell.reuseIdentifier)
         return tableView
     }()
     
+    var listOfCrypto: [CryptoModel] = [] {
+        didSet {
+            tableView.reloadData()
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +31,9 @@ class HomeViewController: BaseViewController {
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
+        
+    
+        
     }
 
     override func viewDidLayoutSubviews() {
@@ -35,12 +45,12 @@ class HomeViewController: BaseViewController {
 
 extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        10
+        return self.listOfCrypto.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CryptoTableViewCell.reuseIdentifier, for: indexPath) as! CryptoTableViewCell
-        cell.textLabel?.text = "Test \(indexPath.row)"
+        cell.textLabel?.text = "\(listOfCrypto[indexPath.row].name)"
         return cell
     }
     

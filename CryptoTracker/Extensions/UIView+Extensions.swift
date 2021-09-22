@@ -30,4 +30,12 @@ extension UIView {
         // inject self (the current UIView) for the preview
         Preview(view: self)
     }
+    
+    func width() -> CGFloat {
+        return self.frame.width
+    }
+    
+    func height() -> CGFloat {
+        return self.frame.height
+    }
 }
