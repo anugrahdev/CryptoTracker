@@ -17,42 +17,52 @@ class HomeViewController: BaseViewController {
         return tableView
     }()
     
-    var listOfCrypto: [CryptoModel] = [] {
-        didSet {
-            tableView.reloadData()
-        }
-    }
-
+    let numberFormatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.allowsFloats = true
+        formatter.locale = .current
+        formatter.numberStyle = .currency
+        formatter.formatterBehavior = .default
+        return formatter
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Crypto Tracker"
         self.navigationItem.largeTitleDisplayMode = .always
         self.navigationController?.navigationBar.prefersLargeTitles = true
         view.addSubview(tableView)
-        tableView.delegate = self
-        tableView.dataSource = self
-        
-    
-        
+        setupAndBindData()
     }
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.fetchCryptos()
+    }
+    
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         tableView.frame = view.bounds
     }
-
-}
-
-extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.listOfCrypto.count
-    }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CryptoTableViewCell.reuseIdentifier, for: indexPath) as! CryptoTableViewCell
-        cell.textLabel?.text = "\(listOfCrypto[indexPath.row].name)"
-        return cell
+    func setupAndBindData() {
+        viewModel.state.asObserver().subscribe(onNext: { [weak self ]state in
+            switch state{
+            case .loading:
+                self?.showSpinner(onView: self!.view)
+            case .finish:
+                self?.removeSpinner()
+            default:
+                self?.removeSpinner()
+            }
+        }).disposed(by: disposeBag)
+        
+        viewModel.cryptos.bind(to: tableView.rx.items(cellIdentifier: CryptoTableViewCell.reuseIdentifier, cellType: CryptoTableViewCell.self)){[weak self] row,element,cell in
+            let price = self?.numberFormatter.string(from: NSNumber(floatLiteral: element.priceUsd ?? 0))
+            cell.configure(name: element.name ?? "", symbol: element.assetID ?? "", price: price ?? "")
+            
+        }.disposed(by: disposeBag)
     }
-    
     
 }
