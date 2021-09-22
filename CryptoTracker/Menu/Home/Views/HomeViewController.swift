@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import RxSwift
+import SkeletonView
 
 class HomeViewController: BaseViewController {
     
@@ -14,29 +16,29 @@ class HomeViewController: BaseViewController {
     private var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.register(CryptoTableViewCell.self, forCellReuseIdentifier: CryptoTableViewCell.reuseIdentifier)
+        tableView.showsVerticalScrollIndicator = false
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = UITableView.automaticDimension
         return tableView
     }()
     
-    let numberFormatter: NumberFormatter = {
-        let formatter = NumberFormatter()
-        formatter.allowsFloats = true
-        formatter.locale = .current
-        formatter.numberStyle = .currency
-        formatter.formatterBehavior = .default
-        return formatter
-    }()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Crypto Tracker"
         self.navigationItem.largeTitleDisplayMode = .always
         self.navigationController?.navigationBar.prefersLargeTitles = true
-        view.addSubview(tableView)
-        setupAndBindData()
+        tableView.isSkeletonable = true
+        tableView.delegate = self
+        tableView.dataSource = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        setupAndBindData()
+        view.addSubview(tableView)
+        view.isSkeletonable = true
         viewModel.fetchCryptos()
     }
     
@@ -50,19 +52,42 @@ class HomeViewController: BaseViewController {
         viewModel.state.asObserver().subscribe(onNext: { [weak self ]state in
             switch state{
             case .loading:
-                self?.showSpinner(onView: self!.view)
+                self?.view.showAnimatedGradientSkeleton()
             case .finish:
-                self?.removeSpinner()
+                self?.view.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.5))
             default:
-                self?.removeSpinner()
+                self?.tableView.hideSkeleton()
             }
         }).disposed(by: disposeBag)
         
-        viewModel.cryptos.bind(to: tableView.rx.items(cellIdentifier: CryptoTableViewCell.reuseIdentifier, cellType: CryptoTableViewCell.self)){[weak self] row,element,cell in
-            let price = self?.numberFormatter.string(from: NSNumber(floatLiteral: element.priceUsd ?? 0))
-            cell.configure(name: element.name ?? "", symbol: element.assetID ?? "", price: price ?? "")
-            
-        }.disposed(by: disposeBag)
+        viewModel.cryptos.subscribe(onNext: { [weak self] cryptos in
+            self?.tableView.reloadData()
+        }).disposed(by: disposeBag)
+        
     }
+    
+}
+
+extension HomeViewController: SkeletonTableViewDataSource, SkeletonTableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        viewModel.numberOfCyrptoItems
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: CryptoTableViewCell.reuseIdentifier, for: indexPath) as! CryptoTableViewCell
+        viewModel.configureCryptoCell(cell, indexPath)
+        return cell
+    }
+    
+    func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
+        return CryptoTableViewCell.reuseIdentifier
+    }
+    
+    func collectionSkeletonView(_ skeletonView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        20
+    }
+    
+    
+    
     
 }

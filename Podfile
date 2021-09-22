@@ -9,7 +9,7 @@ target 'CryptoTracker' do
   pod 'RxSwift'
   pod 'RxCocoa'
   pod 'SnapKit'
-  pod 'Kingfisher'
+  pod 'SkeletonView'
   pod 'Alamofire'
 
   target 'CryptoTrackerTests' do

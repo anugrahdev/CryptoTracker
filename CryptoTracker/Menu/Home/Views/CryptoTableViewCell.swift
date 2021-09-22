@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SkeletonView
 
 class CryptoTableViewCell: BaseTableViewCell {
     
@@ -14,6 +15,7 @@ class CryptoTableViewCell: BaseTableViewCell {
         label.font = .systemFont(ofSize: 17, weight: .semibold)
         label.textColor = .systemGreen
         label.text = "DogeCoin"
+        label.isSkeletonable = true
         return label
     }()
     
@@ -21,6 +23,7 @@ class CryptoTableViewCell: BaseTableViewCell {
         var label = UILabel()
         label.font = .systemFont(ofSize: 17, weight: .regular)
         label.text = "Symbol"
+        label.isSkeletonable = true
         return label
     }()
     
@@ -29,23 +32,37 @@ class CryptoTableViewCell: BaseTableViewCell {
         label.font = .systemFont(ofSize: 20, weight: .semibold)
         label.textColor = .systemGreen
         label.text = "5.0"
+        label.isSkeletonable = true
         return label
+    }()
+    
+    let numberFormatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.allowsFloats = true
+        formatter.locale = .current
+        formatter.numberStyle = .currency
+        formatter.formatterBehavior = .default
+        return formatter
     }()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.addSubview(nameLabel)
-        contentView.addSubview(symbolLabel)
-        contentView.addSubview(priceLabel)
+        isSkeletonable = true
+        contentView.isSkeletonable = true
+        self.contentView.addSubview(nameLabel)
+        self.contentView.addSubview(symbolLabel)
+        self.contentView.addSubview(priceLabel)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(name:String, symbol:String, price:String)  {
-        self.nameLabel.text = name
-        self.symbolLabel.text = symbol
+    func configure(_ model: CryptoModel)  {
+        let price = self.numberFormatter.string(from: NSNumber(floatLiteral: model.priceUsd ?? 0))
+
+        self.nameLabel.text = model.name ?? ""
+        self.symbolLabel.text = model.assetID ?? ""
         self.priceLabel.text = price
     }
     
