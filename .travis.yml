@@ -2,6 +2,6 @@ language: objective-c
 osx_image: xcode12.5
 xcode_workspace: CryptoTracker.xcworkspace
 xcode_scheme: CryptoTracker
-xcode_destination: platform=iOS Simulator,OS=14.4,name=iPhone X
+xcode_destination: platform=iOS Simulator,OS=14.1,name=iPhone 11
 before_install:
 - pod install
