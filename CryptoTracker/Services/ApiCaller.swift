@@ -8,10 +8,12 @@
 import Alamofire
 import Foundation
 
-struct ApiCaller {
-    
-    static public var shared = ApiCaller()
+protocol ApiCallerDelegate {
+    func fetchAllCrypto(completion: @escaping (Result<[CryptoModel], Error>) -> Void)
+}
 
+struct ApiCaller: ApiCallerDelegate{
+    
     private struct Constants {
         static let apiKey = "7098C520-8DDB-45C6-8F7B-441307ED3A08"
         static let baseUrl = "https://rest-sandbox.coinapi.io/v1/"

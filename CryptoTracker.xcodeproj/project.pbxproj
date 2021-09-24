@@ -26,6 +26,8 @@
 		9C91527726FA3BE000F5AC97 /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C91527626FA3BE000F5AC97 /* Reusable.swift */; };
 		9C91527926FA3BF600F5AC97 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C91527826FA3BF600F5AC97 /* BaseTableViewCell.swift */; };
 		9C91527B26FA3E3200F5AC97 /* ApiCaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C91527A26FA3E3200F5AC97 /* ApiCaller.swift */; };
+		9CB1B01126FE284500E00D4B /* MockApiCaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB1B01026FE284500E00D4B /* MockApiCaller.swift */; };
+		9CB1B01526FE29BE00E00D4B /* HomeViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB1B01426FE29BE00E00D4B /* HomeViewModelTests.swift */; };
 		AFEFDE621866476166AA8C43 /* Pods_CryptoTrackerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21B03341888E74055B512164 /* Pods_CryptoTrackerTests.framework */; };
 		E01FEC280142BAB4FB8CE7F6 /* Pods_CryptoTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EF4B6EEE02511D49126C897 /* Pods_CryptoTracker.framework */; };
 		FF757A4425046DFDDD48FFA2 /* Pods_CryptoTracker_CryptoTrackerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9935CB5BECEA3B79EAA69F25 /* Pods_CryptoTracker_CryptoTrackerUITests.framework */; };
@@ -80,6 +82,8 @@
 		9C91527626FA3BE000F5AC97 /* Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
 		9C91527826FA3BF600F5AC97 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
 		9C91527A26FA3E3200F5AC97 /* ApiCaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiCaller.swift; sourceTree = "<group>"; };
+		9CB1B01026FE284500E00D4B /* MockApiCaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockApiCaller.swift; sourceTree = "<group>"; };
+		9CB1B01426FE29BE00E00D4B /* HomeViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModelTests.swift; sourceTree = "<group>"; };
 		C0A6DF51962C7901B175CEFE /* Pods-CryptoTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CryptoTracker.release.xcconfig"; path = "Target Support Files/Pods-CryptoTracker/Pods-CryptoTracker.release.xcconfig"; sourceTree = "<group>"; };
 		C35AAE36C9E360607C6907FE /* Pods-CryptoTrackerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CryptoTrackerTests.release.xcconfig"; path = "Target Support Files/Pods-CryptoTrackerTests/Pods-CryptoTrackerTests.release.xcconfig"; sourceTree = "<group>"; };
 		DDDF402AE0F909BD4058F485 /* Pods-CryptoTrackerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CryptoTrackerTests.debug.xcconfig"; path = "Target Support Files/Pods-CryptoTrackerTests/Pods-CryptoTrackerTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -156,6 +160,8 @@
 			children = (
 				9C91524B26FA342900F5AC97 /* CryptoTrackerTests.swift */,
 				9C91524D26FA342900F5AC97 /* Info.plist */,
+				9CB1B01026FE284500E00D4B /* MockApiCaller.swift */,
+				9CB1B01426FE29BE00E00D4B /* HomeViewModelTests.swift */,
 			);
 			path = CryptoTrackerTests;
 			sourceTree = "<group>";
@@ -525,6 +531,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				9C91524C26FA342900F5AC97 /* CryptoTrackerTests.swift in Sources */,
+				9CB1B01126FE284500E00D4B /* MockApiCaller.swift in Sources */,
+				9CB1B01526FE29BE00E00D4B /* HomeViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

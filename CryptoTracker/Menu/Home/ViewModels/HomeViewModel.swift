@@ -12,17 +12,25 @@ import RxCocoa
 class HomeViewModel: BaseViewModel {
     
     var cryptos = BehaviorRelay<[CryptoModel]>(value: [])
+    var apiCaller: ApiCallerDelegate!
+    var fetchState: NetworkState = .error
+
+    init(service: ApiCallerDelegate = ApiCaller()) {
+        self.apiCaller = service
+    }
     
     func fetchCryptos() {
         state.onNext(.loading)
-        ApiCaller.shared.fetchAllCrypto { [weak self ]result in
+        apiCaller.fetchAllCrypto { [weak self ]result in
             switch result{
             case .success(let cryptos):
                 self?.state.onNext(.success)
                 self?.cryptos.accept(cryptos)
+                self?.fetchState = .success
             case .failure(let error):
                 self?.state.onNext(.error)
                 self?.error.onNext(error.localizedDescription)
+                self?.fetchState = .error
             }
             self?.state.onNext(.finish)
         }
